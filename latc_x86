@@ -1,0 +1,20 @@
+#!/bin/sh
+
+PROJECT="."
+VENV="$PROJECT/lib/x86compilervenv/"
+RUNTIME_LIB_FILE="$PROJECT/lib/runtime.s"
+
+if [ $# -eq 0 ]
+  then
+    echo "Illegal number of parameters. One argument(filepath) needed"
+    exit 1
+fi
+
+if [ ! -f $1 ]; then
+    echo "File not found!"
+    exit 1
+fi
+
+filepath=$(realpath $1)
+python "$PROJECT/src/CompilerLatte.py" $filepath $RUNTIME_LIB_FILE
+exit $?
